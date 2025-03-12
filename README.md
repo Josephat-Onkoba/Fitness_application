@@ -79,5 +79,3 @@ You can now access the application at `http://localhost:3000`.
 - To run the console: `rails console`
 - To run the database seeds: `rails db:seed`
 
-
-```
