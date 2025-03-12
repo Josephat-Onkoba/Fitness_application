@@ -24,7 +24,8 @@ First, clone the repository from GitHub:
 
 ```bash
 git clone https://github.com/Josephat-Onkoba/Fitness_application.git
-cd fitness_application```
+cd fitness_application
+```
 
 #### 2. Install Ruby
 
@@ -36,7 +37,8 @@ If you don't have Ruby installed, you can install it using this guide https://go
 Install Rails using the following command:
 
 ```bash
-gem install rails -v 6.1.0 ```
+gem install rails -v 6.1.0
+```
 
 #### 4. Install Dependencies
 
@@ -44,12 +46,14 @@ Install the required gems and JavaScript packages:
 
 ```bash
 bundle install
-yarn install ```
+yarn install
+```
 
 #### 5. Configure your Database in your app folder at 
 
 ```bash
-config/database.ym ```
+config/database.ym
+```
 #### 6. Create and Migrate the Database
 
 Run the following commands to create and migrate the database:
