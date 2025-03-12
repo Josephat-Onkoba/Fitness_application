@@ -1,0 +1,35 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-800">Welcome Back</h1>
+    <p class="text-gray-600 mt-2">Sign in to your fitness journey</p>
+  </div>
+  
+  <%= form_with url: login_path, method: :post, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :username, "Username or Email", class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.text_field :username, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.label :password, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.password_field :password, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <%= f.check_box :remember_me, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+        <%= f.label :remember_me, "Remember me", class: "ml-2 block text-sm text-gray-700" %>
+      </div>
+      
+      <%= link_to "Forgot password?", new_password_reset_path, class: "text-sm text-blue-600 hover:text-blue-800" %>
+    </div>
+    
+    <div>
+      <%= f.submit "Sign In", class: "w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" %>
+    </div>
+  <% end %>
+  
+  <div class="text-center mt-6">
+    <p class="text-sm text-gray-600">Don't have an account? <%= link_to "Sign up", signup_path, class: "text-blue-600 hover:text-blue-800 font-medium" %></p>
+  </div>
+</div>

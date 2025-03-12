@@ -1,0 +1,65 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-800">Create Account</h1>
+    <p class="text-gray-600 mt-2">Start your fitness journey today</p>
+  </div>
+  
+  <%= form_with model: @user, url: signup_path, class: "space-y-4" do |f| %>
+    <% if @user.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <ul class="list-disc list-inside">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :first_name, class: "block text-gray-700 text-sm font-medium mb-2" %>
+        <%= f.text_field :first_name, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      </div>
+      
+      <div>
+        <%= f.label :last_name, class: "block text-gray-700 text-sm font-medium mb-2" %>
+        <%= f.text_field :last_name, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      </div>
+    </div>
+    
+    <div>
+      <%= f.label :username, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.text_field :username, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.label :email, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.email_field :email, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.label :password, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.password_field :password, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.label :password_confirmation, "Confirm Password", class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.password_field :password_confirmation, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div class="flex items-center">
+      <%= f.check_box :terms, required: true, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+      <label for="terms" class="ml-2 block text-sm text-gray-700">
+        I agree to the <a href="#" class="text-blue-600 hover:text-blue-800">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-800">Privacy Policy</a>
+      </label>
+    </div>
+    
+    <div>
+      <%= f.submit "Create Account", class: "w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" %>
+    </div>
+  <% end %>
+  
+  <div class="text-center mt-6">
+    <p class="text-sm text-gray-600">Already have an account? <%= link_to "Sign in", login_path, class: "text-blue-600 hover:text-blue-800 font-medium" %></p>
+  </div>
+</div>

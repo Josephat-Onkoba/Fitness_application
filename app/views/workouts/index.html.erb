@@ -1,0 +1,82 @@
+<div class="bg-white rounded-lg shadow-md p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800">Your Workouts</h1>
+    <%= link_to new_workout_path, class: "bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors flex items-center" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+      Log New Workout
+    <% end %>
+  </div>
+  
+  <div class="mb-6">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="text-gray-700">Filter by:</span>
+      <%= link_to "All", workouts_path, class: "px-3 py-1 rounded-md #{params[:workout_type].blank? ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <% Workout::WORKOUT_TYPES.each do |type| %>
+        <%= link_to type, workouts_path(workout_type: type), class: "px-3 py-1 rounded-md #{params[:workout_type] == type ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <% if @workouts.empty? %>
+    <div class="text-center py-8">
+      <p class="text-gray-500 mb-4">You haven't logged any workouts yet.</p>
+      <%= link_to "Get started by logging your first workout!", new_workout_path, class: "text-blue-600 hover:text-blue-800 font-medium" %>
+    </div>
+  <% else %>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calories</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @workouts.each do |workout| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.date.strftime("%b %d, %Y") %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.workout_type %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.duration %> min</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.calories_burned %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                <% if workout.sets.present? || workout.reps.present? || workout.weight.present? %>
+                  <span class="text-xs inline-block bg-blue-100 text-blue-800 rounded-full px-2 py-1">
+                    <% if workout.sets.present? && workout.reps.present? %>
+                      <%= "#{workout.sets} sets × #{workout.reps} reps" %>
+                    <% end %>
+                    <% if workout.weight.present? %>
+                      <%= "#{workout.weight} kg" %>
+                    <% end %>
+                  </span>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <%= link_to "View", workout_path(workout), class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                <%= link_to "Edit", edit_workout_path(workout), class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                <%= button_to "Delete", workout_path(workout), method: :delete, class: "text-red-600 hover:text-red-900", form: { class: "inline", data: { turbo_confirm: "Are you sure you want to delete this workout?" } } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mt-6 flex flex-col md:flex-row md:justify-between md:items-center">
+      <div class="mb-4 md:mb-0">
+        <p class="text-gray-600">Total Workouts: <span class="font-medium"><%= @workouts.count %></span></p>
+        <p class="text-gray-600">Total Duration: <span class="font-medium"><%= @workouts.sum(:duration) %> minutes</span></p>
+      </div>
+      
+      <div>
+        <p class="text-gray-600">Total Calories Burned: <span class="font-medium"><%= @workouts.sum(:calories_burned).round %></span></p>
+        <p class="text-gray-600">Average Duration: <span class="font-medium"><%= (@workouts.average(:duration) || 0).round %> minutes</span></p>
+      </div>
+    </div>
+  <% end %>
+</div>

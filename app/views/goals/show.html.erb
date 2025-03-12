@@ -1,0 +1,63 @@
+<div class="bg-white rounded-lg shadow-md p-6 max-w-3xl mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800"><%= @goal.title %></h1>
+    <div class="flex space-x-2">
+      <%= link_to edit_goal_path(@goal), class: "px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50" do %>
+        Edit
+      <% end %>
+      <%= button_to goal_path(@goal), method: :delete, class: "px-3 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700", form: { data: { turbo_confirm: "Are you sure you want to delete this goal?" } } do %>
+        Delete
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 p-4 rounded-lg mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <p class="text-sm text-gray-500">Goal Type</p>
+        <p class="font-medium"><%= @goal.goal_type %></p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Target Date</p>
+        <p class="font-medium"><%= @goal.target_date.strftime("%B %d, %Y") %></p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Status</p>
+        <% if @goal.status == 'Achieved' %>
+          <p class="font-medium text-green-600">Achieved</p>
+        <% elsif @goal.status == 'Overdue' %>
+          <p class="font-medium text-red-600">Overdue</p>
+        <% else %>
+          <p class="font-medium text-blue-600">In Progress</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mb-6">
+    <h2 class="text-lg font-medium text-gray-800 mb-4">Progress</h2>
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex justify-between text-sm mb-1">
+        <span>Current: <%= @goal.current_value %></span>
+        <span>Target: <%= @goal.target_value %></span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+        <div class="bg-blue-600 h-4 rounded-full" style="width: <%= @goal.progress_percentage %>%"></div>
+      </div>
+      <p class="text-center text-gray-700 font-medium"><%= @goal.progress_percentage %>% Complete</p>
+    </div>
+  </div>
+  
+  <% if @goal.description.present? %>
+    <div class="mb-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-2">Description</h2>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-gray-700"><%= @goal.description %></p>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= link_to goals_path, class: "text-blue-600 hover:text-blue-800 font-medium" do %>
+    &larr; Back to Goals
+  <% end %>
+</div>

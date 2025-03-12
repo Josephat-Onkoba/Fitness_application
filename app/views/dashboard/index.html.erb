@@ -1,0 +1,137 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- User Profile Summary -->
+  <div class="bg-white rounded-lg shadow-md p-6 col-span-3 md:col-span-1">
+    <div class="flex flex-col items-center">
+      <div class="relative">
+        <% if current_user.profile_picture.present? %>
+          <%= image_tag current_user.profile_picture, class: "h-24 w-24 rounded-full object-cover" %>
+        <% else %>
+          <%= image_tag "", class: "h-24 w-24 rounded-full object-cover" %>
+        <% end %>
+        <%= link_to profile_path, class: "absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-1 shadow-sm hover:bg-blue-700" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+        <% end %>
+      </div>
+      <h2 class="mt-4 text-xl font-semibold text-gray-800"><%= current_user.full_name %></h2>
+      <p class="text-gray-600">@<%= current_user.username %></p>
+      
+      <div class="w-full mt-6">
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Profile Details</h3>
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Email:</span>
+            <span class="font-medium"><%= current_user.email %></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Member since:</span>
+            <span class="font-medium"><%= current_user.created_at.strftime("%B %d, %Y") %></span>
+          </div>
+        </div>
+      </div>
+      
+      <%= link_to "Edit Profile", profile_path, class: "mt-6 w-full bg-gray-100 text-gray-800 hover:bg-gray-200 py-2 px-4 rounded-md text-center" %>
+    </div>
+  </div>
+  
+  <!-- Fitness Goals -->
+  <div class="bg-white rounded-lg shadow-md p-6 col-span-3 md:col-span-2">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">Fitness Goals</h2>
+      <%= link_to new_goal_path, class: "bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 flex items-center" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Add Goal
+      <% end %>
+    </div>
+    
+    <div class="space-y-4">
+      <% if @goals.empty? %>
+        <p class="text-center text-gray-500">You don't have any active fitness goals. <%= link_to "Create one now!", new_goal_path, class: "text-blue-600 hover:underline" %></p>
+      <% else %>
+        <% @goals.each do |goal| %>
+          <div class="border border-gray-200 rounded-lg p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-medium text-gray-800"><%= goal.title %></h3>
+                <p class="text-sm text-gray-600 mt-1"><%= goal.goal_type %> - <%= goal.target_date.strftime("%b %d") %></p>
+              </div>
+              <div class="flex space-x-2">
+                <%= link_to edit_goal_path(goal), class: "text-gray-400 hover:text-gray-600" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                <% end %>
+                <%= button_to goal_path(goal), method: :delete, class: "text-gray-400 hover:text-red-600", form: { data: { turbo_confirm: "Are you sure?" } } do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                <% end %>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between text-sm mb-1">
+                <span>Progress</span>
+                <span><%= goal.progress_percentage %>%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full" style="width: <%= goal.progress_percentage %>%"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
+  <!-- Recent Workouts -->
+  <div class="bg-white rounded-lg shadow-md p-6 col-span-3">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">Recent Workouts</h2>
+      <%= link_to new_workout_path, class: "bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 flex items-center" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Log Workout
+      <% end %>
+    </div>
+    
+    <% if @recent_workouts.empty? %>
+      <p class="text-center text-gray-500">You haven't logged any workouts yet. <%= link_to "Log your first workout now!", new_workout_path, class: "text-blue-600 hover:underline" %></p>
+    <% else %>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calories</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @recent_workouts.each do |workout| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.date.strftime("%b %d, %Y") %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.workout_type %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.duration %> min</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= workout.calories_burned %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <%= link_to "View", workout_path(workout), class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                <%= link_to "Edit", edit_workout_path(workout), class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                <%= button_to "Delete", workout_path(workout), method: :delete, class: "text-red-600 hover:text-red-900", form: { class: "inline", data: { turbo_confirm: "Are you sure?" } } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 text-right">
+      <%= link_to "View All Workouts", workouts_path, class: "text-blue-600 hover:text-blue-800" %>
+    </div>
+  <% end %>
+</div>
+</div>

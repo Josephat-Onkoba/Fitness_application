@@ -1,0 +1,25 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-800">Reset Password</h1>
+    <p class="text-gray-600 mt-2">Create a new password for your account</p>
+  </div>
+  
+  <%= form_with(model: @user, url: password_reset_path(params[:id]), class: "space-y-4") do |f| %>
+    <%= render 'shared/error_messages', object: @user %>
+    <%= hidden_field_tag :email, @user.email %>
+    
+    <div>
+      <%= f.label :password, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.password_field :password, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.label :password_confirmation, "Confirm Password", class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.password_field :password_confirmation, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.submit "Update Password", class: "w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" %>
+    </div>
+  <% end %>
+</div>

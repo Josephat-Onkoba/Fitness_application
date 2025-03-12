@@ -1,0 +1,194 @@
+<div class="bg-white pb-6 sm:pb-8 lg:pb-12">
+  <!-- Hero Section -->
+  <section class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <div class="mb-8 flex flex-wrap justify-between md:mb-16">
+      <div class="mb-6 flex w-full flex-col justify-center sm:mb-12 lg:mb-0 lg:w-1/2 lg:py-24">
+        <h1 class="mb-4 text-4xl font-bold text-gray-800 sm:text-5xl md:mb-8 md:text-6xl">
+          Your Fitness Journey Starts Here
+        </h1>
+        <p class="max-w-md leading-relaxed text-gray-600 xl:text-lg">
+          Track your gym workouts, set fitness goals, and monitor your progress all in one place. GymFitness helps you stay accountable and achieve results.
+        </p>
+
+        <div class="mt-8 flex gap-4">
+          <% if logged_in? %>
+            <%= link_to "Go to Dashboard", dashboard_path, class: "inline-block rounded-lg bg-blue-600 px-8 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700 md:text-base" %>
+          <% else %>
+            <%= link_to "Get Started", signup_path, class: "inline-block rounded-lg bg-blue-600 px-8 py-3 text-center text-sm font-semibold text-white hover:bg-blue-700 md:text-base" %>
+            <%= link_to "Log In", login_path, class: "inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-800 hover:bg-gray-300 md:text-base" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex w-full justify-center lg:w-1/2">
+        <%= image_tag "hero-image.jpg", alt: "Gym fitness", class: "h-full w-full rounded-lg object-cover" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+      <div class="mb-10 md:mb-16">
+        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+          Why Choose GymFitness?
+        </h2>
+        <p class="mx-auto max-w-screen-md text-center text-gray-600 md:text-lg">
+          Everything you need to reach your fitness goals. Track workouts, monitor progress, and stay motivated.
+        </p>
+      </div>
+      
+      <div class="grid gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
+        <!-- Feature 1 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Track Any Workout</h3>
+            <p class="text-gray-600">Log strength training, cardio, HIIT, and more with detailed tracking of sets, reps, weights, and equipment.</p>
+          </div>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Set Meaningful Goals</h3>
+            <p class="text-gray-600">Create personalized fitness goals with target dates and track your progress with visual indicators.</p>
+          </div>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Monitor Progress</h3>
+            <p class="text-gray-600">Visual dashboards and progress indicators help you see your improvements over time and stay motivated.</p>
+          </div>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Workout History</h3>
+            <p class="text-gray-600">Access your complete workout history to see patterns, track improvements, and identify areas for growth.</p>
+          </div>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Customizable</h3>
+            <p class="text-gray-600">Tailor your fitness journey with custom goal types, workout categories, and tracking preferences.</p>
+          </div>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="flex gap-4 md:gap-6">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg md:h-14 md:w-14">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-800">Secure & Private</h3>
+            <p class="text-gray-600">Your fitness data is protected with secure authentication and privacy controls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workout Types Section -->
+  <section class="py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+      <div class="mb-10 md:mb-16">
+        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+          Track Any Gym Workout
+        </h2>
+        <p class="mx-auto max-w-screen-md text-center text-gray-600 md:text-lg">
+          GymFitness supports all your favorite workout types with specialized tracking for each.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-6 xl:gap-8">
+        <!-- Workout Type Cards - Add 8-12 of these -->
+        <div class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-60"></div>
+          <div class="relative p-4 text-white">
+            <h3 class="text-lg font-semibold">Strength Training</h3>
+            <p class="text-sm">Track sets, reps, weights</p>
+          </div>
+        </div>
+        
+        <div class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-60"></div>
+          <div class="relative p-4 text-white">
+            <h3 class="text-lg font-semibold">Cardio</h3>
+            <p class="text-sm">Monitor distance, pace, heart rate</p>
+          </div>
+        </div>
+        
+        <div class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-60"></div>
+          <div class="relative p-4 text-white">
+            <h3 class="text-lg font-semibold">HIIT</h3>
+            <p class="text-sm">Track intervals and intensity</p>
+          </div>
+        </div>
+        
+        <div class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-60"></div>
+          <div class="relative p-4 text-white">
+            <h3 class="text-lg font-semibold">CrossFit</h3>
+            <p class="text-sm">Log WODs and PRs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-blue-600 py-12 sm:py-16 lg:py-20 text-white">
+    <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+      <div class="flex flex-col items-center">
+        <h2 class="mb-4 text-center text-3xl font-bold md:text-4xl">
+          Start Your Fitness Journey Today
+        </h2>
+        <p class="mx-auto max-w-screen-md text-center text-lg mb-8">
+          Join thousands of users who have transformed their fitness routine with GymFitness.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <% if logged_in? %>
+            <%= link_to "Go to Dashboard", dashboard_path, class: "inline-block rounded-lg bg-white text-blue-600 px-8 py-3 text-center text-sm font-semibold hover:bg-gray-100 md:text-base" %>
+          <% else %>
+            <%= link_to "Create Free Account", signup_path, class: "inline-block rounded-lg bg-white text-blue-600 px-8 py-3 text-center text-sm font-semibold hover:bg-gray-100 md:text-base" %>
+            <%= link_to "Learn More", "#features", class: "inline-block rounded-lg border border-white px-8 py-3 text-center text-sm font-semibold hover:bg-blue-700 md:text-base" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

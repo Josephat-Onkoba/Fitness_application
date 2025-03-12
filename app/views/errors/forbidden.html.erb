@@ -1,0 +1,20 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full text-center">
+    <div class="mb-6">
+      <h1 class="text-9xl font-bold text-blue-600">403</h1>
+      <h2 class="text-2xl font-semibold text-gray-800 mt-4">Access Denied</h2>
+      <p class="text-gray-600 mt-2">You don't have permission to access this page.</p>
+    </div>
+    <div class="mt-8">
+      <%= link_to "Back to Home", root_path, class: "inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors" %>
+    </div>
+    <div class="mt-6">
+      <% if !logged_in? %>
+        <p class="text-gray-500">Please log in to access this feature.</p>
+        <%= link_to "Log in", login_path, class: "text-blue-600 hover:text-blue-800" %>
+      <% else %>
+        <p class="text-gray-500">If you believe this is an error, please contact support.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

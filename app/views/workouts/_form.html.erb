@@ -1,0 +1,69 @@
+<%= form_with model: workout, class: "space-y-6" do |f| %>
+    <% if workout.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <ul class="list-disc list-inside">
+          <% workout.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="form-group">
+        <%= f.label :workout_type, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.select :workout_type, @workout_types, { include_blank: "Select a workout type" }, { required: true, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :date, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.date_field :date, required: true, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :duration, "Duration (minutes)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :duration, required: true, min: 1, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :calories_burned, "Calories Burned (optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :calories_burned, min: 0, placeholder: "Leave blank for automatic calculation", class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <!-- Gym-specific fields -->
+      <div class="form-group">
+        <%= f.label :sets, "(Optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :sets, min: 0, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :reps, "(Optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :reps, min: 0, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :weight, "Weight (kg/lbs) (Optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :weight, min: 0, step: 0.5, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :equipment_used, "(Optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :equipment_used, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="form-group md:col-span-2">
+        <%= f.label :perceived_exertion, "Perceived Exertion (1-10) (Optional)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :perceived_exertion, min: 1, max: 10, class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :notes, "Notes (include exercise details)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :notes, rows: 3, placeholder: "Example: 'Bench Press: 3 sets of 10 reps at 150lbs'", class: "w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+    </div>
+    
+    <div class="flex justify-end space-x-3">
+      <%= link_to "Cancel", workout.new_record? ? workouts_path : workout_path(workout), class: "px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= f.submit workout.new_record? ? "Save Workout" : "Update Workout", class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+  <% end %>

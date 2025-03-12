@@ -1,0 +1,87 @@
+<div class="bg-white rounded-lg shadow-md p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800">Your Fitness Goals</h1>
+    <%= link_to new_goal_path, class: "bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors flex items-center" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+      Set New Goal
+    <% end %>
+  </div>
+  
+  <div class="mb-6">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="text-gray-700">Filter by:</span>
+      <%= link_to "All", goals_path, class: "px-3 py-1 rounded-md #{params[:status].blank? ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <%= link_to "In Progress", goals_path(status: "In Progress"), class: "px-3 py-1 rounded-md #{params[:status] == 'In Progress' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <%= link_to "Achieved", goals_path(status: "Achieved"), class: "px-3 py-1 rounded-md #{params[:status] == 'Achieved' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <%= link_to "Overdue", goals_path(status: "Overdue"), class: "px-3 py-1 rounded-md #{params[:status] == 'Overdue' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+    </div>
+  </div>
+  
+  <% if @goals.empty? %>
+    <div class="text-center py-8">
+      <p class="text-gray-500 mb-4">You haven't set any fitness goals yet.</p>
+      <%= link_to "Get started by setting your first goal!", new_goal_path, class: "text-blue-600 hover:text-blue-800 font-medium" %>
+    </div>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @goals.each do |goal| %>
+        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-medium text-gray-800"><%= goal.title %></h3>
+              <p class="text-sm text-gray-600 mt-1"><%= goal.goal_type %></p>
+            </div>
+            <div>
+              <% if goal.status == 'Achieved' %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  Achieved
+                </span>
+              <% elsif goal.status == 'Overdue' %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                  Overdue
+                </span>
+              <% else %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  In Progress
+                </span>
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>Current: <%= goal.current_value %></span>
+              <span>Target: <%= goal.target_value %></span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-blue-600 h-2 rounded-full" style="width: <%= goal.progress_percentage %>%"></div>
+            </div>
+            <p class="text-right text-xs text-gray-500 mt-1"><%= goal.progress_percentage %>%</p>
+          </div>
+          
+          <% if goal.description.present? %>
+            <div class="mt-4 text-sm text-gray-600 line-clamp-2">
+              <%= goal.description %>
+            </div>
+          <% end %>
+          
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-xs text-gray-500">Target date: <%= goal.target_date.strftime("%b %d, %Y") %></span>
+            <div class="flex space-x-2">
+              <%= link_to goal_path(goal), class: "text-blue-600 hover:text-blue-800 text-sm font-medium" do %>
+                Details
+              <% end %>
+              <%= link_to edit_goal_path(goal), class: "text-gray-500 hover:text-gray-700" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

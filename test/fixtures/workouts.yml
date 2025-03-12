@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  workout_type: MyString
+  duration: 1
+  calories_burned: 1.5
+  date: 2025-03-09
+  notes: MyText
+  sets: 1
+  reps: 1
+  weight: 1.5
+  equipment_used: MyString
+  perceived_exertion: 1
+
+two:
+  user: two
+  workout_type: MyString
+  duration: 1
+  calories_burned: 1.5
+  date: 2025-03-09
+  notes: MyText
+  sets: 1
+  reps: 1
+  weight: 1.5
+  equipment_used: MyString
+  perceived_exertion: 1

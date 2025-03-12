@@ -1,0 +1,91 @@
+<div class="bg-white rounded-lg shadow-md p-6 max-w-3xl mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800"><%= @workout.workout_type %> Workout</h1>
+    <div class="flex space-x-2">
+      <%= link_to edit_workout_path(@workout), class: "px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50" do %>
+        Edit
+      <% end %>
+      <%= button_to workout_path(@workout), method: :delete, class: "px-3 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700", form: { data: { turbo_confirm: "Are you sure you want to delete this workout?" } } do %>
+        Delete
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 p-4 rounded-lg mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <p class="text-sm text-gray-500">Date</p>
+        <p class="font-medium"><%= @workout.date.strftime("%B %d, %Y") %></p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Duration</p>
+        <p class="font-medium"><%= @workout.duration %> minutes</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Calories Burned</p>
+        <p class="font-medium"><%= @workout.calories_burned %></p>
+      </div>
+    </div>
+  </div>
+  
+  <% if @workout.sets.present? || @workout.reps.present? || @workout.weight.present? %>
+    <div class="mb-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-2">Strength Details</h2>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <% if @workout.sets.present? %>
+            <div>
+              <p class="text-sm text-gray-500">Sets</p>
+              <p class="font-medium"><%= @workout.sets %></p>
+            </div>
+          <% end %>
+          
+          <% if @workout.reps.present? %>
+            <div>
+              <p class="text-sm text-gray-500">Reps</p>
+              <p class="font-medium"><%= @workout.reps %></p>
+            </div>
+          <% end %>
+          
+          <% if @workout.weight.present? %>
+            <div>
+              <p class="text-sm text-gray-500">Weight</p>
+              <p class="font-medium"><%= @workout.weight %> kg/lbs</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @workout.equipment_used.present? %>
+    <div class="mb-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-2">Equipment Used</h2>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-gray-700"><%= @workout.equipment_used %></p>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @workout.perceived_exertion.present? %>
+    <div class="mb-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-2">Perceived Exertion</h2>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-gray-700"><%= @workout.perceived_exertion %>/10</p>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if @workout.notes.present? %>
+    <div class="mb-6">
+      <h2 class="text-lg font-medium text-gray-800 mb-2">Notes</h2>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-gray-700"><%= @workout.notes %></p>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= link_to workouts_path, class: "text-blue-600 hover:text-blue-800 font-medium" do %>
+    &larr; Back to Workouts
+  <% end %>
+</div>

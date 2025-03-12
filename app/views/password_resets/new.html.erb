@@ -1,0 +1,21 @@
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-800">Forgot Password</h1>
+    <p class="text-gray-600 mt-2">Enter your email to receive reset instructions</p>
+  </div>
+  
+  <%= form_with(url: password_resets_path, scope: :password_reset, class: "space-y-4") do |f| %>
+    <div>
+      <%= f.label :email, class: "block text-gray-700 text-sm font-medium mb-2" %>
+      <%= f.email_field :email, required: true, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+    </div>
+    
+    <div>
+      <%= f.submit "Send Reset Instructions", class: "w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" %>
+    </div>
+  <% end %>
+  
+  <div class="text-center mt-6">
+    <p class="text-sm text-gray-600">Remember your password? <%= link_to "Log in", login_path, class: "text-blue-600 hover:text-blue-800 font-medium" %></p>
+  </div>
+</div>

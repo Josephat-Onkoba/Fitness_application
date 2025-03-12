@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  title: MyString
+  goal_type: MyString
+  target_value: 1.5
+  current_value: 1.5
+  initial_value: 1.5
+  target_date: 2025-03-09
+  description: MyText
+  status: MyString
+
+two:
+  user: two
+  title: MyString
+  goal_type: MyString
+  target_value: 1.5
+  current_value: 1.5
+  initial_value: 1.5
+  target_date: 2025-03-09
+  description: MyText
+  status: MyString
