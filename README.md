@@ -14,7 +14,7 @@ Ensure you have the following installed on your system:
 - Rails (version 6.1 or later)
 - Node.js
 - Yarn
-- SQLITE3
+- Sqlite3
 
 ### Step-by-Step Installation
 
